@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://buwr3hr6x45nb"]
+
+[ext_resource type="Texture2D" uid="uid://7u7xsfck27vq" path="res://Texturas_Paredes/Bricks104_1K-JPG_Color.jpg" id="1_qpkfu"]
+[ext_resource type="Texture2D" uid="uid://dycjlslt25enm" path="res://Texturas_Suelo/Tiles035_1K-JPG_Roughness.jpg" id="2_aoimg"]
+
+[resource]
+albedo_texture = ExtResource("1_qpkfu")
+roughness_texture = ExtResource("2_aoimg")
+normal_enabled = true
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true

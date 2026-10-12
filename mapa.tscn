@@ -1,0 +1,248 @@
+[gd_scene format=3 uid="uid://byhd5f0ytp7g5"]
+
+[ext_resource type="Material" uid="uid://buwr3hr6x45nb" path="res://Pared_Externa.tres" id="1_lrjei"]
+[ext_resource type="Material" uid="uid://cuuksatkm6d57" path="res://Texturas_Suelo/Tiles035_1K-JPG.tres" id="2_5d3jg"]
+[ext_resource type="Texture2D" uid="uid://7u7xsfck27vq" path="res://Texturas_Paredes/Bricks104_1K-JPG_Color.jpg" id="2_auc41"]
+[ext_resource type="Texture2D" uid="uid://dycjlslt25enm" path="res://Texturas_Suelo/Tiles035_1K-JPG_Roughness.jpg" id="3_ltv3l"]
+[ext_resource type="Material" uid="uid://br21qu2fvwhxc" path="res://Texturas_Techos/Concrete045_1K-JPG.tres" id="3_wan0n"]
+[ext_resource type="PackedScene" uid="uid://5rb6n7j1iqul" path="res://FBX format/doorway.fbx" id="4_auc41"]
+[ext_resource type="Texture2D" uid="uid://camlbdcy07mu7" path="res://Texturas_Mesa/Wood004.png" id="6_ltv3l"]
+[ext_resource type="PackedScene" uid="uid://c11mvhytgcbeh" path="res://FBX format/stairs.fbx" id="7_w30at"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0h62n"]
+
+[sub_resource type="Sky" id="Sky_mqvok"]
+sky_material = SubResource("ProceduralSkyMaterial_0h62n")
+
+[sub_resource type="Environment" id="Environment_bj4t2"]
+background_mode = 2
+sky = SubResource("Sky_mqvok")
+ambient_light_source = 3
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2eut3"]
+albedo_texture = ExtResource("2_auc41")
+roughness_texture = ExtResource("3_ltv3l")
+normal_enabled = true
+uv1_scale = Vector3(0.3, 0.3, 0.3)
+uv1_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3li6u"]
+transparency = 1
+albedo_color = Color(0.8117647, 0.9098039, 1, 1)
+roughness = 0.1
+
+[sub_resource type="BoxMesh" id="BoxMesh_auc41"]
+material = SubResource("StandardMaterial3D_3li6u")
+size = Vector3(2, 1.2, 0.02)
+
+[sub_resource type="BoxMesh" id="BoxMesh_w30at"]
+material = SubResource("StandardMaterial3D_3li6u")
+size = Vector3(0.02, 1.2, 2)
+
+[sub_resource type="BoxMesh" id="BoxMesh_ltv3l"]
+material = SubResource("StandardMaterial3D_3li6u")
+size = Vector3(0.2, 1.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w30at"]
+albedo_texture = ExtResource("6_ltv3l")
+
+[sub_resource type="BoxMesh" id="BoxMesh_bj4t2"]
+material = SubResource("StandardMaterial3D_w30at")
+size = Vector3(3, 0.08, 0.9)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rugew"]
+albedo_texture = ExtResource("6_ltv3l")
+
+[sub_resource type="BoxMesh" id="BoxMesh_jj85x"]
+material = SubResource("StandardMaterial3D_rugew")
+size = Vector3(0.08, 0.67, 0.08)
+
+[node name="Mapa" type="Node3D" unique_id=1308351171]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=458424813]
+environment = SubResource("Environment_bj4t2")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1594487374]
+transform = Transform3D(0.8660254, -0.38302222, 0.32139382, 0, 0.64278764, 0.76604444, -0.5, -0.66341394, 0.5566704, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Piso1" type="Node3D" parent="." unique_id=975364056]
+
+[node name="Estructura" type="CSGCombiner3D" parent="Piso1" unique_id=1439262635]
+use_collision = true
+
+[node name="Bloque" type="CSGBox3D" parent="Piso1/Estructura" unique_id=929826707]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+size = Vector3(16.4, 3.8, 16.4)
+material = ExtResource("1_lrjei")
+
+[node name="Hueco" type="CSGBox3D" parent="Piso1/Estructura" unique_id=308674965]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+operation = 2
+size = Vector3(16, 3.4, 16)
+material = SubResource("StandardMaterial3D_2eut3")
+
+[node name="PisoInterior" type="CSGBox3D" parent="Piso1/Estructura" unique_id=981307344]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+size = Vector3(16, 0.1, 16)
+material = ExtResource("2_5d3jg")
+
+[node name="TechoInterior" type="CSGBox3D" parent="Piso1/Estructura" unique_id=1024598978]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011138439, 3.4405203, 0.020684242)
+size = Vector3(16, 0.1, 16)
+material = ExtResource("3_wan0n")
+
+[node name="HuecoPuerta" type="CSGBox3D" parent="Piso1/Estructura" unique_id=240915050]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 8.1)
+operation = 2
+size = Vector3(1, 2.1, 0.6)
+
+[node name="Escaleras_Piso1" type="CSGBox3D" parent="Piso1/Estructura" unique_id=1463856723]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.500653, 3.4961622, -5.5006757)
+operation = 2
+size = Vector3(4, 0.8, 4)
+
+[node name="Ventana_F1a" type="CSGBox3D" parent="Piso1/Estructura" unique_id=857589224]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.9, 8.1)
+operation = 2
+size = Vector3(2, 1.2, 0.6)
+material = ExtResource("1_lrjei")
+
+[node name="Ventana_F1b" type="CSGBox3D" parent="Piso1/Estructura" unique_id=153609440]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 1.9, 7.962446)
+operation = 2
+size = Vector3(2, 1.2, 0.6)
+material = ExtResource("1_lrjei")
+
+[node name="Ventana_B1a" type="CSGBox3D" parent="Piso1/Estructura" unique_id=1394136612]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.9, -8.1)
+operation = 2
+size = Vector3(2, 1.2, 0.6)
+material = ExtResource("1_lrjei")
+
+[node name="Ventana_L1a" type="CSGBox3D" parent="Piso1/Estructura" unique_id=1022986492]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, -8.1, 1.9, -4)
+operation = 2
+size = Vector3(0.6, 1.2, 2)
+material = ExtResource("1_lrjei")
+
+[node name="Ventana_L1b" type="CSGBox3D" parent="Piso1/Estructura" unique_id=868168490]
+transform = Transform3D(0.9659258, 0, 0.25881904, 0, 1, 0, -0.25881904, 0, 0.9659258, -8.1, 1.9, 4)
+operation = 2
+size = Vector3(0.6, 1.2, 2)
+material = ExtResource("1_lrjei")
+
+[node name="Ventana_R1a" type="CSGBox3D" parent="Piso1/Estructura" unique_id=261853135]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1, 1.9, 0)
+operation = 2
+size = Vector3(0.6, 1.2, 2)
+material = ExtResource("1_lrjei")
+
+[node name="Ventana_R1b" type="CSGBox3D" parent="Piso1/Estructura" unique_id=1275423788]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1, 1.9, 5)
+operation = 2
+size = Vector3(0.6, 1.2, 2)
+material = ExtResource("1_lrjei")
+
+[node name="Ventana_F1a2" type="CSGBox3D" parent="Piso1/Estructura" unique_id=683835828]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.9, 8.1)
+operation = 2
+size = Vector3(2, 1.2, 0.6)
+material = ExtResource("1_lrjei")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Piso1" unique_id=647911674]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.4, 0)
+omni_range = 8.0
+
+[node name="Vidrio_F1a" type="MeshInstance3D" parent="Piso1" unique_id=1389434586]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 1.9, 8.1)
+mesh = SubResource("BoxMesh_auc41")
+
+[node name="Vidrio_F1a5" type="MeshInstance3D" parent="Piso1" unique_id=296874132]
+transform = Transform3D(0.03438863, 0, 0.99940854, 0, 1, 0, -0.99940854, 0, 0.03438863, -8, 1.9, -3.9926207)
+mesh = SubResource("BoxMesh_auc41")
+
+[node name="Vidrio_F1a4" type="MeshInstance3D" parent="Piso1" unique_id=258906832]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.1, 1.9, 0)
+mesh = SubResource("BoxMesh_w30at")
+
+[node name="Vidrio_F1a3" type="MeshInstance3D" parent="Piso1" unique_id=1632611791]
+transform = Transform3D(-0.012408578, 0, -0.999923, 0, 1, 0, 0.999923, 0, -0.012408578, 8.1, 1.9, 5)
+mesh = SubResource("BoxMesh_auc41")
+
+[node name="Vidrio_Lateral izquierdo" type="MeshInstance3D" parent="Piso1" unique_id=719420949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 1.9, 4)
+mesh = SubResource("BoxMesh_ltv3l")
+
+[node name="Vidrio_Trasero" type="MeshInstance3D" parent="Piso1" unique_id=1533255890]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.9, -8.1)
+mesh = SubResource("BoxMesh_auc41")
+
+[node name="Vidrio_F1a2" type="MeshInstance3D" parent="Piso1" unique_id=971250960]
+transform = Transform3D(0.99999994, 0, 0, 0, 1, 0, 0, 0, 0.99999994, 4.5, 1.9, 8.1)
+mesh = SubResource("BoxMesh_auc41")
+
+[node name="Mesa" type="Node3D" parent="Piso1" unique_id=1058131859]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.7303987, 0.3, 0.4056456)
+
+[node name="Tablero" type="MeshInstance3D" parent="Piso1/Mesa" unique_id=1156479664]
+transform = Transform3D(0.036388367, 0, 0.9993377, 0, 1, 0, -0.9993377, 0, 0.036388367, 0, 0.71, 0)
+mesh = SubResource("BoxMesh_bj4t2")
+
+[node name="Pata1" type="MeshInstance3D" parent="Piso1/Mesa" unique_id=55836383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.29201317, 0.33499998, -1.2805465)
+mesh = SubResource("BoxMesh_jj85x")
+
+[node name="Pata2" type="MeshInstance3D" parent="Piso1/Mesa" unique_id=792995868]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.3787918, 0.33499998, 1.3550212)
+mesh = SubResource("BoxMesh_jj85x")
+
+[node name="Pata3" type="MeshInstance3D" parent="Piso1/Mesa" unique_id=738964316]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2898965, 0.33499998, 1.3563987)
+mesh = SubResource("BoxMesh_jj85x")
+
+[node name="Pata4" type="MeshInstance3D" parent="Piso1/Mesa" unique_id=1087152854]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.4380145, 0.33499998, -1.2736214)
+mesh = SubResource("BoxMesh_jj85x")
+
+[node name="Piso2" type="Node3D" parent="." unique_id=932000426]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.8, 0)
+
+[node name="Estructura" type="CSGCombiner3D" parent="Piso2" unique_id=1074151956]
+use_collision = true
+
+[node name="Bloque" type="CSGBox3D" parent="Piso2/Estructura" unique_id=1280133163]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+size = Vector3(16.4, 3.8, 16.4)
+material = ExtResource("1_lrjei")
+
+[node name="Hueco" type="CSGBox3D" parent="Piso2/Estructura" unique_id=787352687]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.9, 0)
+operation = 2
+size = Vector3(16, 3.4, 16)
+material = ExtResource("1_lrjei")
+
+[node name="PisoInterior" type="CSGBox3D" parent="Piso2/Estructura" unique_id=1035129681]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+size = Vector3(16, 0.1, 16)
+material = ExtResource("2_5d3jg")
+
+[node name="TechoInterior" type="CSGBox3D" parent="Piso2/Estructura" unique_id=11118204]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.45, 0)
+size = Vector3(16, 0.1, 16)
+material = ExtResource("3_wan0n")
+
+[node name="Escaleras_Piso2" type="CSGBox3D" parent="Piso2/Estructura" unique_id=141898322]
+transform = Transform3D(1.5, 0, 0, 0, 0.85, 0, 0, 0, 0.85, 5.5, 0.2, -5.5)
+operation = 2
+size = Vector3(4, 0.8, 4)
+
+[node name="doorway" parent="." unique_id=1923619999 instance=ExtResource("4_auc41")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0.5, 0.35, 8.1)
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1383247434]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="stairs" parent="." unique_id=1032953646 instance=ExtResource("7_w30at")]
+transform = Transform3D(0.19, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 6.5, 0.29999995, -6.5)
